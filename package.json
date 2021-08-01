@@ -1,0 +1,37 @@
+{
+  "name": "pgen",
+  "version": "1.0.0",
+  "description": "The pgen erc20 token",
+  "main": "index.js",
+  "scripts": {
+    "test": "hardhat test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/polygen-io/pgen.git"
+  },
+  "author": "polygen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/polygen-io/pgen/issues"
+  },
+  "homepage": "https://github.com/polygen-io/pgen#readme",
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.2",
+    "@nomiclabs/hardhat-waffle": "^2.0.1",
+    "@types/chai": "^4.2.21",
+    "@types/mocha": "^9.0.0",
+    "@types/node": "^16.4.10",
+    "chai": "^4.3.4",
+    "ethereum-waffle": "^3.4.0",
+    "ethers": "^5.4.3",
+    "hardhat": "^2.5.0",
+    "hardhat-gas-reporter": "^1.0.4",
+    "hardhat-typechain": "^0.3.5",
+    "ts-node": "^10.1.0",
+    "typescript": "^4.3.5"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.2.0"
+  }
+}
