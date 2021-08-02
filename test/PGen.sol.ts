@@ -8,8 +8,12 @@ const { expect, assert } = chai;
 
 describe("PGen", async function () {
   it("should have 18 decimals", async () => {
+    const signers = await ethers.getSigners();
+
+    const alice = signers[0]
+
     const pgenFactory = await ethers.getContractFactory("PGen");
-    const pgen = (await pgenFactory.deploy()) as PGen;
+    const pgen = (await pgenFactory.deploy(alice.address)) as PGen;
     await pgen.deployed();
 
     const decimals = await pgen.decimals();
@@ -21,8 +25,12 @@ describe("PGen", async function () {
   });
 
   it("should have correct name and symbol", async function () {
+    const signers = await ethers.getSigners();
+
+    const alice = signers[0]
+
     const pgenFactory = await ethers.getContractFactory("PGen");
-    const pgen = (await pgenFactory.deploy()) as PGen;
+    const pgen = (await pgenFactory.deploy(alice.address)) as PGen;
     await pgen.deployed();
 
     const name = await pgen.name();
@@ -42,8 +50,13 @@ describe("PGen", async function () {
 
   it("should have 1 billion supply", async function () {
     const signers = await ethers.getSigners();
+
+    const alice = signers[0]
+    const bob = signers[1]
+    const carol = signers[2]
+
     const pgenFactory = await ethers.getContractFactory("PGen");
-    const pgen = (await pgenFactory.deploy()) as PGen;
+    const pgen = (await pgenFactory.deploy(bob.address)) as PGen;
     await pgen.deployed();
 
     const supply = await pgen.totalSupply();
@@ -55,12 +68,17 @@ describe("PGen", async function () {
       `wrong supply ${supply} expected ${expectedSupply}`
     );
 
-    const ownedByDeployer = await pgen.balanceOf(signers[0].address);
-    const ownedByAnon = await pgen.balanceOf(signers[1].address);
+    const ownedByDeployer = await pgen.balanceOf(alice.address);
+    const ownedByDistributor = await pgen.balanceOf(bob.address)
+    const ownedByAnon = await pgen.balanceOf(carol.address);
     assert(
-      ownedByDeployer.eq(supply),
-      `wrong ownedByDeployer ${ownedByDeployer} expected ${expectedSupply}`
+      ownedByDeployer.eq(0),
+      `wrong ownedByDeployer ${ownedByDeployer} expected 0`
     );
+    assert(
+      ownedByDistributor.eq(expectedSupply),
+      `wrong ownedByDistributor ${ownedByDistributor} expected ${expectedSupply}`
+    )
     assert(ownedByAnon.eq(0), `wrong ownedByAnon ${ownedByAnon} expected 0`);
   });
 });
