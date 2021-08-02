@@ -10,7 +10,7 @@ describe("PGen", async function () {
   it("should have 18 decimals", async () => {
     const signers = await ethers.getSigners();
 
-    const alice = signers[0]
+    const alice = signers[0];
 
     const pgenFactory = await ethers.getContractFactory("PGen");
     const pgen = (await pgenFactory.deploy(alice.address)) as PGen;
@@ -27,7 +27,7 @@ describe("PGen", async function () {
   it("should have correct name and symbol", async function () {
     const signers = await ethers.getSigners();
 
-    const alice = signers[0]
+    const alice = signers[0];
 
     const pgenFactory = await ethers.getContractFactory("PGen");
     const pgen = (await pgenFactory.deploy(alice.address)) as PGen;
@@ -51,9 +51,9 @@ describe("PGen", async function () {
   it("should have 1 billion supply", async function () {
     const signers = await ethers.getSigners();
 
-    const alice = signers[0]
-    const bob = signers[1]
-    const carol = signers[2]
+    const alice = signers[0];
+    const bob = signers[1];
+    const carol = signers[2];
 
     const pgenFactory = await ethers.getContractFactory("PGen");
     const pgen = (await pgenFactory.deploy(bob.address)) as PGen;
@@ -69,7 +69,7 @@ describe("PGen", async function () {
     );
 
     const ownedByDeployer = await pgen.balanceOf(alice.address);
-    const ownedByDistributor = await pgen.balanceOf(bob.address)
+    const ownedByDistributor = await pgen.balanceOf(bob.address);
     const ownedByAnon = await pgen.balanceOf(carol.address);
     assert(
       ownedByDeployer.eq(0),
@@ -78,7 +78,7 @@ describe("PGen", async function () {
     assert(
       ownedByDistributor.eq(expectedSupply),
       `wrong ownedByDistributor ${ownedByDistributor} expected ${expectedSupply}`
-    )
+    );
     assert(ownedByAnon.eq(0), `wrong ownedByAnon ${ownedByAnon} expected 0`);
   });
 });
