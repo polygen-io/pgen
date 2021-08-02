@@ -66,5 +66,6 @@ pkgs.stdenv.mkDerivation {
   export PATH=$( npm bin ):$PATH
   # keep it fresh
   npm install
+  hardhat compile
  '';
 }
