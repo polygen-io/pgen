@@ -3,3 +3,4 @@ cache
 typechain
 artifacts
 .vscode
+!dist/**
